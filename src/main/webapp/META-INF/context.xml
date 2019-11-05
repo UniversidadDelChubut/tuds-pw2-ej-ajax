@@ -2,4 +2,8 @@
 <Context path="/ej_ajax">
   <!--    Pool para la base de datos -->
   <ResourceLink global="jdbc/pool_base_activeweb" name="jdbc/db_pool" type="javax.sql.DataSource"/>
+  
+  <!-- parámetros para envío de correos. Revise server.xml -->
+  <ResourceLink name="usuario_correo" global="usuario_correo" type="java.lang.String"/>
+  <ResourceLink name="password_correo" global="password_correo" type="java.lang.String"/>
 </Context>

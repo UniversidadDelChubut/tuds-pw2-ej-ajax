@@ -1,0 +1,4 @@
+<!-- Dentro de GlobalNamingResources -->
+<!-- Parámetros para envío de correos -->
+<Environment name="usuario_correo" value="su_cuenta@gmail.com" type="java.lang.String"/>
+<Environment name="password_correo" value="su_clave" type="java.lang.String"/>
