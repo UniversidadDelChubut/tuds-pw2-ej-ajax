@@ -1,4 +1,6 @@
 <!-- Dentro de GlobalNamingResources -->
 <!-- Parámetros para envío de correos -->
+<!-- Recuerden habilitar las "aplicaciones menos seguras" en google: https://myaccount.google.com/security -->
+
 <Environment name="usuario_correo" value="su_cuenta@gmail.com" type="java.lang.String"/>
 <Environment name="password_correo" value="su_clave" type="java.lang.String"/>
