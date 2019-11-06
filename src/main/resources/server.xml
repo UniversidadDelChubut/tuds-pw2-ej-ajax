@@ -4,3 +4,5 @@
 
 <Environment name="usuario_correo" value="su_cuenta@gmail.com" type="java.lang.String"/>
 <Environment name="password_correo" value="su_clave" type="java.lang.String"/>
+
+<Environment name="jwt_private_key" value="esta_es_mi_clave_privada" type="java.lang.String"/>

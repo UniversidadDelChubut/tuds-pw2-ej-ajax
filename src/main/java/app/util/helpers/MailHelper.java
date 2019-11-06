@@ -1,4 +1,4 @@
-package app.controllers;
+package app.util.helpers;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -7,11 +7,11 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 
-class MailHelper {
+public class MailHelper {
 
     public static void mandarMail(String para, String asunto, String mensaje) throws EmailException, NamingException {
-        String usuario_correo = getTomcatVariable("usuario_correo");
-        String password_correo = getTomcatVariable("password_correo");
+        String usuario_correo = (String)TomcatHelper.getVariable("usuario_correo");
+        String password_correo = (String)TomcatHelper.getVariable("password_correo");
 
         HtmlEmail email = new HtmlEmail();
         email.setHostName("smtp.googlemail.com");
@@ -25,11 +25,5 @@ class MailHelper {
         email.send();
     }
 
-    private static String getTomcatVariable(String nombre_variable) throws NamingException {
-        Context initCtx = new InitialContext();
-        Context envCtx = (Context) initCtx.lookup("java:comp/env");
-
-        String var = (String) envCtx.lookup(nombre_variable);
-        return var;
-    }
+    
 }

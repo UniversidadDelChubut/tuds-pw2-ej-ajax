@@ -6,4 +6,7 @@
   <!-- parámetros para envío de correos. Revise server.xml -->
   <ResourceLink name="usuario_correo" global="usuario_correo" type="java.lang.String"/>
   <ResourceLink name="password_correo" global="password_correo" type="java.lang.String"/>
+  
+  <!-- jwt -->
+  <ResourceLink name="jwt_private_key" global="jwt_private_key" type="java.lang.String"/>
 </Context>

@@ -2,7 +2,7 @@
 <script src="${context_path}/js/enlaces.js"></script>
 <h2>Ejemplo AJAX</h2>
 <#list 1..5 as item>
-<a href="${context_path}/home/seccion${item}" class="enlace">Sección ${item}</a><#sep> | 
+<a href="${context_path}/home/seccion${item}" class="enlace enlace-${item}" data-numero="${item}">Sección ${item}</a><#sep> | 
 </#list>
  | <a href="${context_path}/contacto">Contacto</a>
 

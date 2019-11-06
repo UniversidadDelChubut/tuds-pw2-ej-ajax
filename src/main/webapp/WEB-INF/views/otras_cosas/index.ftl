@@ -7,7 +7,7 @@
  <@flash name="mensaje">
  <div class="alert alert-success"><@flash name="mensaje"/></div>
 </@flash>
-<div style="width: 30%">
+<div style="width: 30%; float: left">
 <fieldset>
     <legend>Envío de correo</legend>
     <form action="${context_path}/otras_cosas/mandarMail" method="post">
@@ -16,6 +16,16 @@
         <p>Su comentario:<br>
             <textarea name="su_comentario" rows="5" required>${request.su_comentario!}</textarea>
         <button type="submit">Enviar correo</button>
+    </form>
+</fieldset>    
+</div>
+ 
+<div style="width: 30%; float: right">
+<fieldset>
+    <legend>Generación de token JWT</legend>
+    <form action="${context_path}/otras_cosas/prueba_generar_token" method="post">
+        <p>Su correo: <br><input type="email" name="su_email" value="${request.su_email!}" required/></p>
+        <button type="submit">Generar token</button>
     </form>
 </fieldset>    
 </div>
