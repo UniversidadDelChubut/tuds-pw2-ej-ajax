@@ -1,6 +1,7 @@
 package app.controllers;
 
 import app.util.helpers.MailHelper;
+import app.util.helpers.RecaptchaV3Helper;
 import app.util.helpers.TomcatHelper;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -17,8 +18,8 @@ import org.javalite.activeweb.annotations.POST;
 
 public class OtrasCosasController extends AppController {
 
-    public void index() {
-
+    public void index() throws NamingException {
+        view("recaptcha_public_key", (String) TomcatHelper.getVariable("recaptcha_public_key"));
     }
 
     @POST
@@ -60,7 +61,35 @@ public class OtrasCosasController extends AppController {
             view("error", "El token no pudo validarse: " + ex.getMessage());
         }
     }
-    
+
+    @POST
+    public void pruebaVerificarRecaptcha() {
+        try {
+            if (!requestHas("su_email")) {
+                throw new IllegalArgumentException("Debe ingresar el correo");
+            }
+            
+            if (!requestHas("g-recaptcha-response")) {
+                throw new IllegalArgumentException("Falta el código captcha para verificar.");
+            }
+
+            try {
+                new RecaptchaV3Helper().verify(param("g-recaptcha-response"));
+            } catch (Exception ex) {
+                logError(ex.getMessage(), ex);
+                throw new IllegalArgumentException("Ha fallado la verificación de ReCaptcha. Revise los logs.");
+            }
+
+        } catch (Exception ex) {
+            flash("error", ex.getMessage());
+            redirect();
+            return;
+        }
+        
+        flash("mensaje", "El captcha se verificó correctamente!");
+        redirect();
+    }
+
     // https://github.com/auth0/java-jwt
     private String generarJWT(String mail) {
         try {
@@ -75,7 +104,7 @@ public class OtrasCosasController extends AppController {
             throw new RuntimeException("No se pudo generar el token de prueba.", ex);
         }
     }
-    
+
     // https://github.com/auth0/java-jwt
     private DecodedJWT verificarJWT(String token) throws NamingException {
         String secret = (String) TomcatHelper.getVariable("jwt_private_key");
@@ -87,5 +116,4 @@ public class OtrasCosasController extends AppController {
         DecodedJWT jwt = verifier.verify(token);
         return jwt;
     }
-
 }

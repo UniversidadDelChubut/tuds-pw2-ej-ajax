@@ -20,7 +20,18 @@
 </fieldset>    
 </div>
  
-<div style="width: 30%; float: right">
+<div style="width: 30%; float: right;">
+<fieldset>
+    <legend>Prueba ReCaptcha</legend>
+    <form action="${context_path}/otras_cosas/prueba_verificar_recaptcha" method="post">
+        <p>Su correo: <br><input type="email" name="su_email" value="${request.su_email!}" required/></p>
+        <@render partial="recaptcha" />
+        <button type="submit">Validar recaptcha</button>
+    </form>
+</fieldset>
+</div>
+ 
+<div style="width: 30%; float: right; margin-right: 5%;">
 <fieldset>
     <legend>Generación de token JWT</legend>
     <form action="${context_path}/otras_cosas/prueba_generar_token" method="post">
@@ -30,8 +41,13 @@
 </fieldset>    
 </div>
 
+<div class="clearfix"></div>
+
 <style>
+    legend {font-weight: bold;}
     div.alert {padding: 5px;}
     div.alert-error {background-color: #ff5c5c;}
     div.alert-success {background-color: #b0ff82;}
+    div.clearfix {clear: both;}
 </style>
+

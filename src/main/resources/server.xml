@@ -6,3 +6,7 @@
 <Environment name="password_correo" value="su_clave" type="java.lang.String"/>
 
 <Environment name="jwt_private_key" value="esta_es_mi_clave_privada" type="java.lang.String"/>
+
+<Environment name="recaptcha_url" value="https://www.google.com/recaptcha/api/siteverify" type="java.lang.String"/>
+<Environment name="recaptcha_public_key" value="esta_es_mi_clave_publica" type="java.lang.String"/>
+<Environment name="recaptcha_private_key" value="esta_es_mi_clave_privada" type="java.lang.String"/>

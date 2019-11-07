@@ -9,4 +9,10 @@
   
   <!-- jwt -->
   <ResourceLink name="jwt_private_key" global="jwt_private_key" type="java.lang.String"/>
+  
+  <!-- recaptcha -->
+  <ResourceLink name="recaptcha_url" global="recaptcha_url" type="java.lang.String"/>
+  <ResourceLink name="recaptcha_public_key" global="recaptcha_public_key" type="java.lang.String"/>
+  <ResourceLink name="recaptcha_private_key" global="recaptcha_private_key" type="java.lang.String"/>
+  
 </Context>
