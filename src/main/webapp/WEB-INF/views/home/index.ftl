@@ -1,4 +1,4 @@
-<script src="${context_path}/js/jquery-3.4.1.min.js"></script>
+<script src="${context_path}/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="${context_path}/js/enlaces.js"></script>
 <h2>Ejemplo AJAX</h2>
 <#list 1..5 as item>

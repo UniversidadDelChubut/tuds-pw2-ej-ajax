@@ -1,0 +1,17 @@
+{
+  "name": "webapp",
+  "homepage": "https://github.com/UniversidadDelChubut/tuds-pw2-ej-ajax",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.4.1"
+  }
+}

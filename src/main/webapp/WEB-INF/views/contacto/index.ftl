@@ -1,4 +1,4 @@
-<script src="${context_path}/js/jquery-3.4.1.min.js"></script>
+<script src="${context_path}/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="${context_path}/js/form.js"></script>
 <h2>Contacto</h2>
 <fieldset>
