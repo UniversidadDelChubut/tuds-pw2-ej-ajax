@@ -12,7 +12,7 @@
             <h1>Proyecto Activeweb</h1>
             </div>
         <div class="contenido">
-            ${page_content}
+            ${page_content?no_esc}
             </div>
         </body>
     </html>
