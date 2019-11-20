@@ -1,6 +1,5 @@
 package app.util.helpers;
 
-import javax.naming.NamingException;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
@@ -17,7 +16,7 @@ public class MailHelper {
     }
     
 
-    public void mandarMail(String para, String asunto, String mensaje) throws EmailException, NamingException {
+    public void mandarMail(String para, String asunto, String mensaje) throws EmailException {
         HtmlEmail email = new HtmlEmail();
         email.setHostName("smtp.googlemail.com");
         email.setSmtpPort(465);

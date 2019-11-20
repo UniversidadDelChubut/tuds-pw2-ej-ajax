@@ -1,7 +1,6 @@
 package app.util.helpers;
 
 import java.util.Map;
-import javax.naming.NamingException;
 import org.javalite.activeweb.AppContext;
 import org.javalite.common.Convert;
 import org.javalite.common.JsonHelper;
@@ -15,7 +14,7 @@ public class RecaptchaV3Helper {
     private static String URL;
     private static final Double DEFAULT_THRESHOLD = 0.5;
 
-    public RecaptchaV3Helper(AppContext ac) throws NamingException {
+    public RecaptchaV3Helper(AppContext ac) {
         PRIVATE_KEY = (String)ac.get("recaptcha_private_key");
         URL = (String)ac.get("recaptcha_url");
     }

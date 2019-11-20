@@ -5,9 +5,9 @@ import app.util.helpers.RecaptchaV3Helper;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import java.util.Date;
-import javax.naming.NamingException;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.mail.EmailException;
 import org.javalite.activeweb.AppController;
@@ -15,7 +15,7 @@ import org.javalite.activeweb.annotations.POST;
 
 public class OtrasCosasController extends AppController {
 
-    public void index() throws NamingException {
+    public void index() {
     }
 
     @POST
@@ -27,7 +27,7 @@ public class OtrasCosasController extends AppController {
 
         try {
             new MailHelper(appContext()).mandarMail(para, asunto, mensaje);
-        } catch (NamingException | EmailException ex) {
+        } catch (EmailException ex) {
             logError(ex.getMessage(), ex);
             flash("error", "No se pudo enviar el correo: " + ex.getMessage());
             render("index");
@@ -39,7 +39,7 @@ public class OtrasCosasController extends AppController {
     }
 
     @POST
-    public void pruebaGenerarToken() throws NamingException {
+    public void pruebaGenerarToken() {
         String mail = param("su_email");
 
         String token = generarJWT(mail);
@@ -47,7 +47,7 @@ public class OtrasCosasController extends AppController {
     }
 
     @POST
-    public void pruebaVerificarToken() throws NamingException {
+    public void pruebaVerificarToken() {
         try {
             DecodedJWT token_verificado = verificarJWT(param("token"));
             view("token_verificado", token_verificado);
@@ -69,12 +69,7 @@ public class OtrasCosasController extends AppController {
                 throw new IllegalArgumentException("Falta el código captcha para verificar.");
             }
 
-            try {
-                new RecaptchaV3Helper(appContext()).verify(param("g-recaptcha-response"));
-            } catch (Exception ex) {
-                logError(ex.getMessage(), ex);
-                throw new IllegalArgumentException("Ha fallado la verificación de ReCaptcha. Revise los logs.");
-            }
+            new RecaptchaV3Helper(appContext()).verify(param("g-recaptcha-response"));
 
         } catch (Exception ex) {
             flash("error", ex.getMessage());
@@ -96,13 +91,13 @@ public class OtrasCosasController extends AppController {
                     .withSubject(mail)
                     .withExpiresAt(DateUtils.addMinutes(new Date(), 2)) // expira en 2 minutos
                     .sign(algorithm);
-        } catch (Exception ex) {
+        } catch (JWTCreationException | IllegalArgumentException ex) {
             throw new RuntimeException("No se pudo generar el token de prueba.", ex);
         }
     }
 
     // https://github.com/auth0/java-jwt
-    private DecodedJWT verificarJWT(String token) throws NamingException {
+    private DecodedJWT verificarJWT(String token) {
         String secret = (String) appContext().get("jwt_private_key");
         Algorithm algorithm = Algorithm.HMAC256(secret);
         JWTVerifier verifier = JWT.require(algorithm)
