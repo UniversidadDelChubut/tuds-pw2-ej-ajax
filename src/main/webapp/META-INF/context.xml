@@ -2,17 +2,13 @@
 <Context path="/ej_ajax">
   <!--    Pool para la base de datos -->
   <ResourceLink global="jdbc/pool_base_activeweb" name="jdbc/db_pool" type="javax.sql.DataSource"/>
-  
   <!-- parámetros para envío de correos. Revise server.xml -->
-  <ResourceLink name="usuario_correo" global="usuario_correo" type="java.lang.String"/>
-  <ResourceLink name="password_correo" global="password_correo" type="java.lang.String"/>
-  
+  <ResourceLink global="usuario_correo" name="usuario_correo" type="java.lang.String"/>
+  <ResourceLink global="password_correo" name="password_correo" type="java.lang.String"/>
   <!-- jwt -->
-  <ResourceLink name="jwt_private_key" global="jwt_private_key" type="java.lang.String"/>
-  
+  <ResourceLink global="jwt_private_key" name="jwt_private_key" type="java.lang.String"/>
   <!-- recaptcha -->
-  <ResourceLink name="recaptcha_url" global="recaptcha_url" type="java.lang.String"/>
-  <ResourceLink name="recaptcha_public_key" global="recaptcha_public_key" type="java.lang.String"/>
-  <ResourceLink name="recaptcha_private_key" global="recaptcha_private_key" type="java.lang.String"/>
-  
+  <ResourceLink global="recaptcha_url" name="recaptcha_url" type="java.lang.String"/>
+  <ResourceLink global="recaptcha_public_key" name="recaptcha_public_key" type="java.lang.String"/>
+  <ResourceLink global="recaptcha_private_key" name="recaptcha_private_key" type="java.lang.String"/>
 </Context>

@@ -2,7 +2,6 @@ package app.controllers;
 
 import app.util.helpers.MailHelper;
 import app.util.helpers.RecaptchaV3Helper;
-import app.util.helpers.TomcatHelper;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -17,7 +16,6 @@ import org.javalite.activeweb.annotations.POST;
 public class OtrasCosasController extends AppController {
 
     public void index() throws NamingException {
-        view("recaptcha_public_key", (String) TomcatHelper.getVariable("recaptcha_public_key"));
     }
 
     @POST
@@ -28,7 +26,7 @@ public class OtrasCosasController extends AppController {
         String mensaje = merge("/otras_cosas/ejemplo_mail", params1st());
 
         try {
-            MailHelper.mandarMail(para, asunto, mensaje);
+            new MailHelper(appContext()).mandarMail(para, asunto, mensaje);
         } catch (NamingException | EmailException ex) {
             logError(ex.getMessage(), ex);
             flash("error", "No se pudo enviar el correo: " + ex.getMessage());
@@ -72,7 +70,7 @@ public class OtrasCosasController extends AppController {
             }
 
             try {
-                new RecaptchaV3Helper().verify(param("g-recaptcha-response"));
+                new RecaptchaV3Helper(appContext()).verify(param("g-recaptcha-response"));
             } catch (Exception ex) {
                 logError(ex.getMessage(), ex);
                 throw new IllegalArgumentException("Ha fallado la verificación de ReCaptcha. Revise los logs.");
@@ -91,7 +89,7 @@ public class OtrasCosasController extends AppController {
     // https://github.com/auth0/java-jwt
     private String generarJWT(String mail) {
         try {
-            String secret = (String) TomcatHelper.getVariable("jwt_private_key");
+            String secret = (String) appContext().get("jwt_private_key");
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("mutual")
@@ -105,7 +103,7 @@ public class OtrasCosasController extends AppController {
 
     // https://github.com/auth0/java-jwt
     private DecodedJWT verificarJWT(String token) throws NamingException {
-        String secret = (String) TomcatHelper.getVariable("jwt_private_key");
+        String secret = (String) appContext().get("jwt_private_key");
         Algorithm algorithm = Algorithm.HMAC256(secret);
         JWTVerifier verifier = JWT.require(algorithm)
                 .withIssuer("mutual")

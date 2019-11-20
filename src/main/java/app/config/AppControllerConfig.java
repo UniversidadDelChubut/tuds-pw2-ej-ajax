@@ -3,7 +3,6 @@ package app.config;
 import app.controllers.filters.ParamValidationFilter;
 import org.javalite.activeweb.AbstractControllerConfig;
 import org.javalite.activeweb.AppContext;
-import org.javalite.activeweb.controller_filters.DBConnectionFilter;
 
 public class AppControllerConfig extends AbstractControllerConfig {
 
