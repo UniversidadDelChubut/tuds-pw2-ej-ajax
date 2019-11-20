@@ -30,10 +30,10 @@ $(function () {
             var $ul_errores = $("<ul></ul>");
             $.each(data, function(key, value) {
                 var $li = $("<li></li>");
-                $li.text(key + ": "+ value);
+                $li.text(value);
                 $ul_errores.append($li);
             });            
-            $errores.append($ul_errores).show();
+            $errores.html($ul_errores).show();
             
         }).always(function () {
             $cargando.hide();
